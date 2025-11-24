@@ -1,13 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using api.Data;
 using api.Dtos.User;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace api.Services
@@ -17,19 +14,27 @@ namespace api.Services
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
         private readonly IRoleRepository _roleRepository;
-        public AuthService(IUserRepository userRepository, IConfiguration configuration, IRoleRepository roleRepository)
+        private readonly IEmailService _emailService;
+
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, IRoleRepository roleRepository, IEmailService emailService)
         {
             _userRepository = userRepository;
             _configuration = configuration;
             _roleRepository = roleRepository;
+            _emailService = emailService;
         }
         public async Task<UserResponseDto> LoginAsync(UserLoginDto dto)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
                 throw new Exception("Invalid email or password.");
+
+            if (!user.IsEmailConfirmed)
+                throw new Exception("Email is not confirmed. Please verify your email before logging in.");
+
             if (user.IsActive == false)
                 throw new Exception("Your account is banned. Contact fanpage to get more information.");
+
             var token = GenerateJwtToken(user);
             return user.ToUserResponseDto(token);
         }
@@ -48,10 +53,42 @@ namespace api.Services
                 throw new Exception("Invalid role specified.");
 
             var user = dto.ToUserFromRegisterDto(role.RoleId);
+            user.IsEmailConfirmed = false;
+
+            var code = new Random().Next(100000, 999999).ToString();
+            user.EmailVerificationCode = code;
+            user.CodeExpire = DateTime.UtcNow.AddMinutes(10);
+
+            var emailResult = await _emailService.SendEmailAsync(dto.Email, "Email Verification", $"Your verification code is: {code}");
+
+            if (!emailResult)
+                throw new Exception("Failed to send verification email. Please try again later.");
+
             await _userRepository.AddAsync(user);
 
             return user.ToUserResponseDto(null);
 
+        }
+
+        public async Task<bool> VerifyEmailAsync(string email, string token)
+        {
+            var user = await _userRepository.GetByEmailAsync(email);
+
+            if (user == null)
+                throw new Exception("User not found.");
+
+            if (user.IsEmailConfirmed)
+                return true;
+
+            if (user.EmailVerificationCode == token && user.CodeExpire > DateTime.UtcNow)
+            {
+                user.IsEmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.CodeExpire = null;
+                await _userRepository.UpdateAsync(user);
+                return true;
+            }
+            return false;
         }
 
         private string GenerateJwtToken(User user)

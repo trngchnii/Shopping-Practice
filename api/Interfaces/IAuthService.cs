@@ -6,5 +6,6 @@ namespace api.Interfaces
     {
         Task<UserResponseDto> LoginAsync(UserLoginDto dto);
         Task<UserResponseDto> RegisterAsync(UserRegisterDto dto);
+        Task<bool> VerifyEmailAsync(string email, string token);
     }
 }

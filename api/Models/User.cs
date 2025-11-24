@@ -13,10 +13,15 @@ namespace api.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public bool IsActive { get; set; }
 
+        public bool IsEmailConfirmed { get; set; }
+        public string? EmailVerificationCode { get; set; }
+        public DateTime? CodeExpire { get; set; }
+
         public Cart Cart { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Wishlist> Wishlists { get; set; }
         public ICollection<Review> Reviews { get; set; }
-
     }
+
 }
+
