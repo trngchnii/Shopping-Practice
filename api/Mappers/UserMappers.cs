@@ -24,6 +24,7 @@ namespace api.Mappers
                 IsActive = userModel.IsActive
             };
         }
+
         public static User ToUserFromCreateDTO(this CreateUserRequestDto createUserRequestDto, int roleId)
         {
             return new User
@@ -37,5 +38,31 @@ namespace api.Mappers
                 IsActive = true
             };
         }
+
+        public static User ToUserFromRegisterDto(this UserRegisterDto dto, int roleId)
+        {
+            return new User
+            {
+                Email = dto.Email,
+                FullName = dto.FullName,
+                RoleId = roleId,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                CreatedAt = DateTime.UtcNow,
+                IsActive = true
+            };
+        }
+
+        public static UserResponseDto ToUserResponseDto(this User user, string token)
+        {
+            return new UserResponseDto
+            {
+                UserId = user.UserId,
+                Email = user.Email,
+                FullName = user.FullName,
+                RoleName = user.Role.RoleName,
+                Token = token
+            };
+        }
+
     }
 }

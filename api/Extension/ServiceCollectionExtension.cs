@@ -1,5 +1,6 @@
 using api.Interfaces;
 using api.Repositories;
+using api.Services;
 
 namespace api.Extension
 {
@@ -9,6 +10,8 @@ namespace api.Extension
         {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }

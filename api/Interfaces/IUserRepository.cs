@@ -2,8 +2,8 @@ using api.Models;
 
 namespace api.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-        Task<List<User>> GetUsersAsync();
+        Task<User> GetByEmailAsync(string email);
     }
 }
