@@ -1,0 +1,45 @@
+# Build folders
+bin/
+obj/
+Debug/
+Release/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio temporary files
+.vs/
+.vscode/
+!.vscode/extensions.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules / front-end build
+node_modules/
+dist/
+dist-ssr/
+
+# OS & editor files
+.DS_Store
+.idea/
+
+# Project / editor-specific
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment & sensitive configuration
+*.local
+.env
+appsettings.json
