@@ -13,7 +13,7 @@ namespace api.Repositories
         }
         public async Task<Role?> GetByNameAsync(string roleName)
         {
-            return await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == roleName);
+            return await _dbSet.FirstOrDefaultAsync(r => r.RoleName == roleName);
         }
     }
 }

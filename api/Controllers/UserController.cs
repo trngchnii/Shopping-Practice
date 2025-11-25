@@ -1,7 +1,7 @@
 using api.Dtos.User;
 using api.Interfaces;
 using api.Mappers;
-using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -10,80 +10,103 @@ namespace api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IBaseRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
-        public UserController(IBaseRepository<User> userRepository, IRoleRepository roleRepository)
+        public UserController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
             _roleRepository = roleRepository;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userRepository.GetAllAsync();
-            var userDtos = users.Select(u => u.ToUserDto());
-            return Ok(userDtos);
+            try
+            {
+                var users = await _userRepository.GetAllAsync();
+                var userDtos = users.Select(u => u.ToUserDto());
+                return Ok(userDtos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserById([FromRoute] int userId)
         {
-            var user = await _userRepository.GetByIdAsync(userId);
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _userRepository.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return Ok(user.ToUserDto());
             }
-            return Ok(user.ToUserDto());
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDto userDto)
         {
-            var role = await _roleRepository.GetByNameAsync(userDto.RoleName);
-            if (role == null)
+            try
             {
-                return BadRequest($"Role '{userDto.RoleName}' does not exist.");
+                var role = await _roleRepository.GetByNameAsync(userDto.RoleName);
+                if (role == null)
+                {
+                    return BadRequest($"Role '{userDto.RoleName}' does not exist.");
+                }
+                var userModel = userDto.ToUserFromCreateDTO(role.RoleId);
+
+                await _userRepository.AddAsync(userModel);
+
+                return CreatedAtAction(nameof(GetUserById), new { userId = userModel.UserId }, userModel.ToUserDto());
             }
-            var userModel = userDto.ToUserFromCreateDTO(role.RoleId);
-
-            await _userRepository.AddAsync(userModel);
-
-            return CreatedAtAction(nameof(GetUserById), new { userId = userModel.UserId }, userModel.ToUserDto());
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUser([FromRoute] int userId, [FromBody] UpdateUserRequestDto updateUserDto)
         {
-            var userModel = await _userRepository.GetByIdAsync(userId);
-
-            if (userModel == null)
+            try
             {
-                return NotFound();
+                var updatedUser = await _userRepository.UpdateUser(userId, updateUserDto);
+
+                if (updatedUser == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedUser.ToUserDto());
             }
-
-            var role = await _roleRepository.GetByNameAsync(updateUserDto.RoleName);
-
-            if (role == null)
+            catch (Exception ex)
             {
-                return BadRequest($"Role '{updateUserDto.RoleName}' does not exist.");
+
+                return BadRequest(ex.Message);
             }
-
-            userModel.Email = updateUserDto.Email;
-            userModel.FullName = updateUserDto.FullName;
-            userModel.RoleId = role.RoleId;
-            userModel.AvatarUrl = updateUserDto.AvatarUrl;
-            userModel.DateOfBirth = updateUserDto.DateOfBirth;
-
-            await _userRepository.SaveChangesAsync();
-
-            return Ok(userModel.ToUserDto());
         }
         [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteUser([FromRoute] int userId)
         {
-            var userModel = await _userRepository.DeleteAsync(userId);
+            try
+            {
+                var userModel = await _userRepository.DeleteAsync(userId);
 
-            if (!userModel)
-                return NotFound();
+                if (userModel == null)
+                    return NotFound();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
     }

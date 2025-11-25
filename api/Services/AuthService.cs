@@ -85,7 +85,7 @@ namespace api.Services
                 user.IsEmailConfirmed = true;
                 user.EmailVerificationCode = null;
                 user.CodeExpire = null;
-                await _userRepository.UpdateAsync(user);
+                await _userRepository.UpdateUserFieldsAsync(user);
                 return true;
             }
             return false;

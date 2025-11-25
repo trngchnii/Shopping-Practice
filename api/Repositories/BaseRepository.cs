@@ -27,20 +27,13 @@ namespace api.Repositories
             return entity;
         }
 
-        public async Task<T> UpdateAsync(T entity, bool save = true)
-        {
-            _dbSet.Update(entity);
-            if (save) await _context.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<bool> DeleteAsync(object id, bool save = true)
+        public async Task<T?> DeleteAsync(int id, bool save = true)
         {
             var entity = await _dbSet.FindAsync(id);
-            if (entity == null) return false;
+            if (entity == null) return null;
             _dbSet.Remove(entity);
             if (save) await _context.SaveChangesAsync();
-            return true;
+            return entity;
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();

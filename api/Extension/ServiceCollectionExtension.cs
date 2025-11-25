@@ -13,6 +13,7 @@ namespace api.Extension
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }
     }
