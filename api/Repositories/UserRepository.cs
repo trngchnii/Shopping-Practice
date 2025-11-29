@@ -18,14 +18,14 @@ namespace api.Repositories
             return await _dbSet.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public async Task<User?> UpdateUser(int userId, UpdateUserRequestDto updateUserDto)
+        public async Task<User?> UpdateUser(int userId, User updateUserDto)
         {
             var userModel = await GetByIdAsync(userId);
 
             if (userModel == null)
                 return null;
 
-            var role = await _roleRepository.GetByNameAsync(updateUserDto.RoleName);
+            var role = await _roleRepository.GetByNameAsync(updateUserDto.Role.RoleName);
 
             if (role == null)
                 return null;

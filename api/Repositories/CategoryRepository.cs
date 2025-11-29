@@ -1,5 +1,4 @@
 using api.Data;
-using api.Dtos.Category;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +11,14 @@ namespace api.Repositories
         {
         }
 
-        public async Task<Category?> UpdateCategoryAsync(int categoryId, CategoryCreateDto category)
+        public async Task<List<Category>> GetParentCategoryAsync()
         {
-            var existCategory = await GetByIdAsync(categoryId);
+            return await _dbSet.Where(c => c.ParentId == null).Include(c => c.SubCategories).ToListAsync();
+        }
 
-            if (existCategory == null)
-                return null;
-
-            existCategory.CategoryName = category.CategoryName;
-            existCategory.ParentId = category.ParentId;
-            await SaveChangesAsync();
-            return existCategory;
+        public async Task<Category?> GetWithChildrenAsync(int categoryId)
+        {
+            return await _dbSet.Include(c => c.SubCategories).FirstOrDefaultAsync(c => c.CategoryId == categoryId);
         }
     }
 }

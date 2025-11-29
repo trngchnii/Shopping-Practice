@@ -11,7 +11,7 @@ namespace api.Mappers
             {
                 CategoryId = category.CategoryId,
                 CategoryName = category.CategoryName,
-                ParentId = category.ParentId
+                ParentId = category.ParentId,
             };
         }
 
@@ -24,12 +24,28 @@ namespace api.Mappers
             };
         }
 
+        public static void ToCategoryUpdateDto(this Category category, CategoryCreateDto categoryUpdateDto)
+        {
+            category.CategoryName = categoryUpdateDto.CategoryName;
+            category.ParentId = categoryUpdateDto.ParentId;
+        }
+
         public static CategoryDeleteDto ToCategoryDeleteDto(this Category category)
         {
             return new CategoryDeleteDto
             {
                 CategoryId = category.CategoryId,
                 CategoryName = category.CategoryName
+            };
+        }
+
+        public static CategoryTreeDto ToCategoryTreeDto(this Category category)
+        {
+            return new CategoryTreeDto
+            {
+                CategoryId = category.CategoryId,
+                CategoryName = category.CategoryName,
+                SubCategories = category.SubCategories?.Select(c => c.ToCategoryTreeDto()).ToList() ?? new List<CategoryTreeDto>()
             };
         }
     }

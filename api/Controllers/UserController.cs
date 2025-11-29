@@ -1,6 +1,7 @@
 using api.Dtos.User;
 using api.Interfaces;
 using api.Mappers;
+using api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -76,7 +77,14 @@ namespace api.Controllers
         {
             try
             {
-                var updatedUser = await _userRepository.UpdateUser(userId, updateUserDto);
+                var role = await _roleRepository.GetByNameAsync(updateUserDto.RoleName);
+
+                if (role == null)
+                {
+                    return BadRequest($"Role '{updateUserDto.RoleName}' does not exist.");
+                }
+
+                var updatedUser = await _userRepository.UpdateUser(userId, updateUserDto.ToUserFromUpdateDTO(role.RoleId));
 
                 if (updatedUser == null)
                 {

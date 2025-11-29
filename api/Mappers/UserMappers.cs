@@ -39,6 +39,20 @@ namespace api.Mappers
             };
         }
 
+        public static User ToUserFromUpdateDTO(this UpdateUserRequestDto updateUserRequestDto, int roleId)
+        {
+            return new User
+            {
+                Email = updateUserRequestDto.Email,
+                FullName = updateUserRequestDto.FullName,
+                RoleId = roleId,
+                AvatarUrl = updateUserRequestDto.AvatarUrl,
+                DateOfBirth = updateUserRequestDto.DateOfBirth,
+                CreatedAt = DateTime.UtcNow,
+                IsActive = true
+            };
+        }
+
         public static User ToUserFromRegisterDto(this UserRegisterDto dto, int roleId)
         {
             return new User

@@ -5,6 +5,7 @@ namespace api.Interfaces
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
-        Task<Category?> UpdateCategoryAsync(int categoryId, CategoryCreateDto category);
+        Task<Category?> GetWithChildrenAsync(int categoryId);
+        Task<List<Category>> GetParentCategoryAsync();
     }
 }
