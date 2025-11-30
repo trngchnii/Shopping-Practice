@@ -49,7 +49,7 @@ namespace api.Controllers
             var category = await _categoryRepository.GetByIdAsync(categoryId);
             if (category == null)
                 return NotFound();
-            return Ok(category);
+            return Ok(category.ToCategoryDto());
         }
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto dto)
