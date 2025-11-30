@@ -12,6 +12,15 @@ namespace api.Repositories
         {
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductAsync()
+        {
+            return await _dbSet
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.Images)
+                .ToListAsync();
+        }
+
         public async Task<Product?> GetProductByIdAsync(int productId)
         {
             return await _dbSet

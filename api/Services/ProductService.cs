@@ -38,14 +38,25 @@ namespace api.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        public async Task<ProductDto?> UpdateProductAsync(int productId, UpdateProductDto updateProductDto, IFormFile[]? images)
         {
-            throw new NotImplementedException();
-        }
+            var product = await _productRepository.GetByIdAsync(productId);
+            if (product == null) return null;
 
-        public Task<ProductDto?> UpdateProductAsync(int productId, CreateProductDto updateProductDto, IFormFile[]? images)
-        {
-            throw new NotImplementedException();
+            product.ToUpdateProductDto(updateProductDto);
+
+            if (images != null && images.Length > 0)
+            {
+                foreach (var img in images)
+                {
+                    var path = await _fileService.SaveFileAsync(img, "products");
+                    product.Images ??= new List<ProductImage>();
+                    product.Images.Add(new ProductImage { ProductId = product.ProductId, ImageUrl = path, });
+                }
+            }
+
+            await _productRepository.SaveChangesAsync();
+            return product.ToProductDto();
         }
     }
 }

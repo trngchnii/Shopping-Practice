@@ -17,8 +17,8 @@ namespace api.Mappers
                 Price = product.Price,
                 StockQuantity = product.StockQuantity,
                 Discount = product.Discount,
-                CategoryName = product.Category.CategoryName,
-                BrandName = product.Brand.BrandName,
+                CategoryName = product.Category?.CategoryName,
+                BrandName = product.Brand?.BrandName,
                 IsActive = product.IsActive,
                 ImageUrls = product.Images?.Select(img => img.ImageUrl).ToList() ?? new List<string>()
             };
