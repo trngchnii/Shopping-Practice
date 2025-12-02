@@ -1,45 +1,92 @@
-# Build folders
-bin/
-obj/
-Debug/
-Release/
+##################################
+#           .NET BACKEND
+##################################
 
-# User-specific files
-*.user
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+build/
+publish/
+out/
+
+# Visual Studio
+.vs/
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
+*.rsuser
 
-# Visual Studio temporary files
-.vs/
+# Rider / JetBrains
+.idea/
+
+# VS Code
 .vscode/
 !.vscode/extensions.json
 
+# .NET temp / cache
+*.cache
+*.opendb
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
 # Logs
-logs/
 *.log
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+
+# Secrets & Config
+appsettings.json
+appsettings.*.json
+secrets.json
+*.pfx
+*.local
+
+# EF Core
+**/Migrations/
+
+##################################
+#            REACT
+##################################
+
+# Node
+node_modules/
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
+yarn-error.log*
+/.pnp
+.pnp.js
 
-# Node modules / front-end build
-node_modules/
+# Build output
 dist/
+build/
 dist-ssr/
 
-# OS & editor files
-.DS_Store
-.idea/
-
-# Project / editor-specific
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Environment & sensitive configuration
-*.local
+# Env files
 .env
-appsettings.json
+.env.development.local
+.env.test.local
+.env.production.local
+
+##################################
+#            OS FILES
+##################################
+
+.DS_Store
+Thumbs.db
+
+# testing
+/coverage
