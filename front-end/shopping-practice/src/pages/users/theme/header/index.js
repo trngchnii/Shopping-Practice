@@ -10,7 +10,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { formatter } from "../../../../utils/fomater";
+import { formatter } from "../../../../utils/formatter";
 import { ROUTERS } from "../../../../utils/router";
 const Header = () => {
   const [menus] = useState([

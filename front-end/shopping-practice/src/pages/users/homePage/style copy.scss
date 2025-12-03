@@ -66,6 +66,108 @@
   }
 }
 
+// .new-arrivals {
+//     margin-top: 30px;
+
+//     .section-title{
+//         margin-bottom: 30px;
+//         text-align: center;
+
+//         h2 {
+//             position: relative;
+//             font-size: 28px;
+//             font-weight: 700;
+//             text-transform: uppercase;
+//             color: map.get($theme-colors, "bold-text");
+//             letter-spacing: 2px;
+
+//             &::after {
+//                 position: absolute;
+//                 left: 50%;
+//                 transform: translateX(-50%);
+//                 bottom: -15px;
+//                 height: 4px;
+//                 width: 80px;
+//                 background: map.get($theme-colors, "main");
+//                 content: "";
+//                 border-radius: 2px;
+//             }
+//         }
+//     }
+
+//     .react-tabs{
+//         ul {
+//             display: flex;
+//             justify-content: center;
+//             margin-bottom: 40px;
+//             gap: 20px;
+
+//             li {
+//                 list-style: none;
+//                 font-size: 18px;
+//                 color: map.get($theme-colors, "normal-text");
+//                 display: inline-block;
+//                 margin-right: 25px;
+//                 position: relative;
+//                 cursor: pointer;
+//             }
+//         }
+//     }
+
+//     .new_arrivals__item{
+//         margin-bottom: 50px;
+
+//         &:hover{
+//             .new_arrivals__item__pic_hover{
+//                 bottom: -15% !important;
+//             }
+//         }
+
+//         .new_arrivals__item__pic {
+//             height: 270px;
+//             position: relative;
+//             overflow: hidden;
+//             background-position: center;
+
+//             ul {
+//                 position: absolute;
+//                 left: 0;
+//                 bottom: -40%;
+//                 width: 100%;
+//                 text-align: center;
+//                 transition: all, 0.5s;
+
+//                 li {
+//                     list-style: none;
+//                     display: inline-block;
+//                     margin-right: 10px;
+
+//                     &:hover{
+//                         svg{
+//                             background: map.get($theme-colors, "main");
+//                             border-color: map.get($theme-colors, "main");
+//                             color: #ffffff;
+//                             transform: rotate(360deg) !important;
+//                         }
+//                     }
+
+//                     svg{
+//                         padding: 10px;
+//                         height: 20px;
+//                         width: 20px;
+//                         border: 1px solid #ebebeb;
+//                         background: #ffffff;
+//                         color: #565555;
+//                         transition: all, 0.3s;
+//                         border-radius: 50%;
+//                     }
+//                 }
+//             }
+//         }
+
+
+//     }
+// }
 .new-arrivals {
   margin-top: 50px;
 
@@ -124,50 +226,58 @@
       }
     }
   }
-.new_arrivals__item {
-    margin: 0 15px 20px;
+
+  .new_arrivals__item {
+    margin-bottom: 20px;
 
     .new_arrivals__item__pic {
-      height: 220px;
+      width: 90%;
+      margin: 0 auto; 
+      height: 200px;
+      position: relative;
+      overflow: hidden;
       background-size: cover;
       background-position: center;
       border-radius: 8px;
-      position: relative;
-      overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 
       .new_arrivals__item__pic_hover {
         position: absolute;
-        bottom: -50px;
         left: 50%;
         transform: translateX(-50%);
+        bottom: -60%;
         display: flex;
         gap: 10px;
-        transition: bottom 0.3s ease, opacity 0.3s ease;
-        opacity: 0;
+        transition: all 0.3s ease;
 
         li {
           list-style: none;
 
           svg {
             padding: 10px;
-            border-radius: 50%;
-            background: #fff;
+            height: 20px;
+            width: 20px;
+            background: #ffffff;
+            color: #565555;
             transition: all 0.3s ease;
+            border-radius: 50%;
+          }
+
+          &:hover svg {
+            background: map.get($theme-colors, "main");
+            border-color: map.get($theme-colors, "main");
+            color: #ffffff;
+            transform: rotate(360deg);
           }
         }
+      }
+      &:hover {
+      transform: translateY(-6px);
 
-        li:hover svg {
-          background: map.get($theme-colors, "main");
-          color: #fff;
-          transform: rotate(360deg);
-        }
+      .new_arrivals__item__pic_hover {
+        bottom: 15px; // icon hover nổi lên
       }
     }
-
-    &:hover .new_arrivals__item__pic_hover {
-      bottom: 15px;
-      opacity: 1;
     }
 
     .new_arrivals__item__text {
@@ -175,13 +285,14 @@
       margin-top: 15px;
 
       h6 {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
 
         a {
           color: map.get($theme-colors, "bold-text");
           text-decoration: none;
+          transition: color 0.3s ease;
 
           &:hover {
             color: map.get($theme-colors, "main");
@@ -190,14 +301,13 @@
       }
 
       h5 {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         color: map.get($theme-colors, "main");
       }
     }
   }
 }
-
 
 .react-tabs__tab {
   &:focus {
@@ -237,7 +347,7 @@
   }
 
   .recommend_item {
-    margin: 0 15px 20px;
+    margin: 0 15px;
 
     &_pic {
       height: 220px;
@@ -261,7 +371,7 @@
         li {
             list-style: none;
             svg {
-                padding: 10px;
+                padding: 8px;
                 border-radius: 50%;
                 background: #fff;
                 transition: all 0.3s ease;
@@ -286,21 +396,17 @@
       margin-top: 10px;
 
       h6 {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 600;
         margin-bottom: 5px;
 
         a {
-            color: map.get($theme-colors, "bold-text");
-            text-decoration: none;
-            display: block;         
-            white-space: nowrap;     
-            overflow: hidden;     
-            text-overflow: ellipsis;
+          color: map.get($theme-colors, "bold-text");
+          text-decoration: none;
 
-            &:hover {
-                color: map.get($theme-colors, "main");
-            }
+          &:hover {
+            color: map.get($theme-colors, "main");
+          }
         }
       }
 

@@ -9,6 +9,10 @@ import item3Img from "../../../asset/users/images/categories/item3.jpg";
 import item4Img from "../../../asset/users/images/categories/item4.jpg";
 import item5Img from "../../../asset/users/images/categories/item5.jpeg";
 import item6Img from "../../../asset/users/images/categories/item6.jpg";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
+import { formatter } from "../../../utils/formatter";
+import { Link } from "react-router-dom";
 const HomePage = () => {
   const responsive = {
     superLargeDesktop: {
@@ -56,9 +60,124 @@ const HomePage = () => {
     },
   ];
 
+  const newArrivals = {
+    all: {
+      title: "All",
+      products: [
+        {
+          img: item1Img,
+          name: "Babythree",
+          price: 200,
+        },
+        {
+          img: item2Img,
+          name: "Popmart",
+          price: 200,
+        },
+        {
+          img: item2Img,
+          name: "Popmart",
+          price: 200,
+        },
+        {
+          img: item2Img,
+          name: "Popmart",
+          price: 200,
+        },
+        {
+          img: item2Img,
+          name: "Popmart",
+          price: 200,
+        },
+      ],
+    },
+    popmart: {
+      title: "Popmart",
+      products: [
+        {
+          img: item2Img,
+          name: "Popmart",
+          price: 200,
+        },
+      ],
+    },
+  };
+
+  const renderNewArrivals = (data) => {
+    const tabList = [];
+    const tabPanels = [];
+
+    Object.keys(data).forEach((key, index) => {
+      // create Tab
+      tabList.push(<Tab key={key}>{data[key].title}</Tab>);
+
+      // create TabPanel
+      tabPanels.push(
+        <TabPanel key={key}>
+          <div className="row">
+            {data[key].products.map((item, j) => (
+              <div className="col-xl-3" key={j}>
+                <div className="new_arrivals__item">
+                  <div
+                    className="new_arrivals__item__pic"
+                    style={{ backgroundImage: `url(${item.img})` }}
+                  >
+                    <ul className="new_arrivals__item__pic_hover">
+                      <li>
+                        <AiOutlineEye />
+                      </li>
+                      <li>
+                        <AiOutlineShoppingCart />
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="new_arrivals__item__text">
+                    <h6>
+                      <Link to="">{item.name}</Link>
+                    </h6>
+                    <h5>{formatter(item.price)}</h5>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </TabPanel>
+      );
+    });
+
+    return (
+      <Tabs>
+        <TabList>{tabList}</TabList>
+        {tabPanels}
+      </Tabs>
+    );
+  };
+  // thêm dữ liệu recommend
+  const recommendItems = [
+    {
+      img: item3Img,
+      name: "MOLLY × Zootopia Co-branded Series",
+      price: 180,
+    },
+    {
+      img: item4Img,
+      name: "POP MART 15th Anniversary Series",
+      price: 220,
+    },
+    {
+      img: item5Img,
+      name: "Babythree v3 mini",
+      price: 150,
+    },
+    {
+      img: item6Img,
+      name: "Babythree Lucky cat v1",
+      price: 170,
+    },
+  ];
+
   return (
     <>
-      {" "}
       <div className="container container__categories_slider">
         <Carousel responsive={responsive} className="categories_slider">
           {sliderItems.map((item, key) => (
@@ -71,6 +190,49 @@ const HomePage = () => {
             </div>
           ))}
         </Carousel>
+      </div>
+
+      <div className="container">
+        <div className="new-arrivals">
+          <div className="section-title">
+            <h2>NEW ARRIVALS</h2>
+          </div>
+          {renderNewArrivals(newArrivals)}
+        </div>
+      </div>
+
+      {/* Recommend For You */}
+      <div className="container">
+        <div className="recommend">
+          <div className="section-title">
+            <h2>RECOMMEND FOR YOU</h2>
+          </div>
+          <Carousel responsive={responsive} className="recommend_slider">
+            {recommendItems.map((item, idx) => (
+              <div className="recommend_item" key={idx}>
+                <div
+                  className="recommend_item_pic"
+                  style={{ backgroundImage: `url(${item.img})` }}
+                >
+                  <ul className="recommend_item_hover">
+                    <li>
+                      <AiOutlineEye />
+                    </li>
+                    <li>
+                      <AiOutlineShoppingCart />
+                    </li>
+                  </ul>
+                </div>
+                <div className="recommend_item_text">
+                  <h6>
+                    <Link to="">{item.name}</Link>
+                  </h6>
+                  <h5>{formatter(item.price)}</h5>
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </>
   );
