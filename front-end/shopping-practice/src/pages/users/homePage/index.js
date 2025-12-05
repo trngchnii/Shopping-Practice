@@ -182,6 +182,16 @@ const HomePage = () => {
   return (
     <>
       <div className="container container__categories_slider">
+        <div className="hero__item">
+          <div className="hero__text">
+            <span>Blindbox</span>
+            <h2>Babythree - Popmart</h2>
+            <p>Free home delivery</p>
+            <Link to="" className="primary-btn">
+              Buy now
+            </Link>
+          </div>
+        </div>
         <Carousel responsive={responsive} className="categories_slider">
           {sliderItems.map((item, key) => (
             <div

@@ -1,12 +1,81 @@
 @use "sass:map";
 @import "../../../styles/pages/all";
+$banner-img: "../../../asset/users/images/hero/banner.jpg";
 
 .container__categories_slider {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 40px auto;
   padding: 0 15px;
 
+  .hero__item {                       
+  margin: 40px auto;  
+  background-image: url($banner-img);
+  background-size: cover;             
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;      
+  padding-left: 75px;
+  border-radius: 12px;                
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);  
+    z-index: 1;
+  }
+
+  .hero__text {
+    position: relative;
+    z-index: 2;                       
+    color: #fff;
+
+    span {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 10px;
+      color: map.get($theme-colors, "main");
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .primary-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: map.get($theme-colors, "main");
+      color: #fff;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: darken(map.get($theme-colors, "main"), 10%);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
   .categories_slider {
+    
     .categories_slider_item {
         height: 250px;
         margin: 0 20px;

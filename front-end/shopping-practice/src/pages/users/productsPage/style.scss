@@ -1,0 +1,135 @@
+@use "sass:map";
+@import "../../../styles/pages/all";
+.containerr {
+  max-width: 1600px;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+.slidebar__item {
+  margin-bottom: 20px;
+    
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 15px;
+
+      a {
+        text-decoration: none;
+        font-size: 15px;
+        color: #555;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: map.get($theme-colors, "main");
+        }
+      }
+    }
+  }
+}
+.product_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+  .product_item {
+    &_pic {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+      .product_item_hover {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        transition: bottom 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+
+        li {
+            list-style: none;
+            svg {
+                padding: 10px;
+                border-radius: 50%;
+                background: #fff;
+                transition: all 0.3s ease;
+            }
+        }
+
+        li:hover svg {
+          background: map.get($theme-colors, "main");
+          color: #fff;
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    &:hover .product_item_hover {
+      bottom: 15px;
+      opacity: 1;
+    }
+
+    &_text {
+      text-align: center;
+      margin-top: 10px;
+
+      h6 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+
+        a {
+            color: map.get($theme-colors, "bold-text");
+            text-decoration: none;
+            display: block;         
+            white-space: nowrap;     
+            overflow: hidden;     
+            text-overflow: ellipsis;
+
+            &:hover {
+                color: map.get($theme-colors, "main");
+            }
+        }
+      }
+
+      h5 {
+        font-size: 16px;
+        font-weight: 700;
+        color: map.get($theme-colors, "main");
+      }
+    }
+  }
+
+
+
+
+// @include Responsive($TABLET_DEVICE) {
+//   .product_list {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+// }
+
+
+
