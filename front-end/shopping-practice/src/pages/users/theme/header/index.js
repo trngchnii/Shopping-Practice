@@ -1,19 +1,25 @@
 import { memo, useState } from "react";
 import "./style.scss";
 import {
+  AiOutlineDownCircle,
   AiOutlineFacebook,
   AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineMail,
+  AiOutlineMenu,
   AiOutlinePhone,
   AiOutlineShoppingCart,
+  AiOutlineUpCircle,
   AiOutlineUser,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { formatter } from "../../../../utils/formatter";
 import { ROUTERS } from "../../../../utils/router";
+import { BiUser } from "react-icons/bi";
 const Header = () => {
-  const [menus] = useState([
+  const [isShowHumberger, setShowHumberger] = useState();
+
+  const [menus, setMenus] = useState([
     {
       name: "Home",
       path: ROUTERS.USER.HOME,
@@ -48,6 +54,90 @@ const Header = () => {
   ]);
   return (
     <>
+      <div
+        className={`hamberger__menu__wrapper ${isShowHumberger ? "show" : ""}`}
+      >
+        <div className="header__logo">
+          <h1>Nina Shop</h1>
+        </div>
+        <div className="hamberger__menu__cart">
+          <ul>
+            <li>
+              <Link to={""}>
+                <AiOutlineShoppingCart />
+                <span>1</span>
+              </Link>
+            </li>
+          </ul>
+          <div className="header__cart__price">
+            Giỏ hàng: <span>{formatter(10000)}</span>
+          </div>
+        </div>
+        <div className="hamberger__menu__widget">
+          <div className="header__top__right__auth">
+            <Link to={""}>
+              {" "}
+              <BiUser /> Đăng nhập
+            </Link>
+          </div>
+        </div>
+        <div className="humberger__menu_nav">
+          <ul>
+            {menus.map((menu, key) => (
+              <li key={key} to={menu.path}>
+                {" "}
+                <Link
+                  to={menu.path}
+                  onClick={() => {
+                    const newMenus = [...menus];
+                    newMenus[key].isShowSubmenu = !newMenus[key].isShowSubmenu;
+                    setMenus(newMenus);
+                  }}
+                >
+                  {menu.name}
+                  {menu.child &&
+                    (menu.isShowSubmenu ? (
+                      <AiOutlineDownCircle />
+                    ) : (
+                      <AiOutlineUpCircle />
+                    ))}
+                </Link>
+                {menu.child && (
+                  <ul
+                    className={`header__menu__dropdown ${
+                      menu.isShowSubmenu ? "show__submenu" : ""
+                    }`}
+                  >
+                    {menu.child.map((menuChild, childKey) => (
+                      <li key={`${key}-${childKey}`}>
+                        <Link to={menuChild.path}>{menuChild.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="humberger__menu_social">
+          <Link to="">
+            <AiOutlineFacebook />
+          </Link>
+          <Link to="">
+            <AiOutlineInstagram />
+          </Link>
+          <Link to="">
+            <AiOutlineLinkedin />
+          </Link>
+        </div>
+      </div>
+      {isShowHumberger && (
+        <div
+          className="menu__overlay"
+          onClick={() => setShowHumberger(false)}
+        />
+      )}
       <div className="header__top">
         <div className="container">
           <div className="row">
@@ -131,18 +221,25 @@ const Header = () => {
                 </li>
               </ul>
             </div>
+            <div className="humberger_open">
+              <AiOutlineMenu
+                onClick={() => {
+                  setShowHumberger(!isShowHumberger);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
       <div className="container">
-        <div className="row hero__search">
-          <div className="col-xl-9 col-lg-9 col-md-9 col-sm-9 hero_search_form">
+        <div className="hero__search">
+          <div className="hero_search_form">
             <form>
               <input type="text" placeholder="Enter keywords to search…" />
               <button type="submit">Search</button>
             </form>
           </div>
-          <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 hero__search__phone">
+          <div className="hero__search__phone">
             <div className="hero__search__phone__icon">
               <AiOutlinePhone />
             </div>

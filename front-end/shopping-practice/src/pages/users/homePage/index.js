@@ -116,7 +116,10 @@ const HomePage = () => {
         <TabPanel key={key}>
           <div className="row">
             {data[key].products.map((item, j) => (
-              <div className="col-xl-3" key={j}>
+              <div
+                className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12"
+                key={j}
+              >
                 <div className="new_arrivals__item">
                   <div
                     className="new_arrivals__item__pic"
