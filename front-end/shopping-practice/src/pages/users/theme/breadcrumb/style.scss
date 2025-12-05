@@ -2,23 +2,20 @@
 @import "../../../../styles/pages/theme";
 
 .breadcrumb {
+  max-width: 1200px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 10px 20px;
   margin: 0 auto;
-  background: linear-gradient(
-    135deg,
-    map.get($theme-colors, "main"),
-    darken(map.get($theme-colors, "main"), 15%)
-  );
+  background: linear-gradient(135deg, map.get($theme-colors, "main"), darken(map.get($theme-colors, "main"), 15%));
   text-align: center;
   position: relative;
   overflow: hidden;
 
   // effect background
   &::after {
-    content: ""; 
+    content: "";
     position: absolute;
     inset: 0;
     background: rgba(255, 255, 255, 0.05);

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import Breadcrumb from "../theme/breadcrumb";
 import "../productsPage/style.scss";
-import { Link } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 import { ROUTERS } from "../../../utils/router";
 import item3Img from "../../../asset/users/images/categories/item3.jpg";
 import item4Img from "../../../asset/users/images/categories/item4.jpg";
@@ -36,7 +36,7 @@ const ProductsPage = () => {
   return (
     <>
       <Breadcrumb name="List Product" />
-      <div className="containerr">
+      <div className="container_products">
         <div className="row">
           <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div className="slidebar">
@@ -71,7 +71,9 @@ const ProductsPage = () => {
                   </div>
                   <div className="product_item_text">
                     <h6>
-                      <Link to="">{item.name}</Link>
+                      <Link to={generatePath(ROUTERS.USER.PRODUCT, { id: 1 })}>
+                        {item.name}
+                      </Link>
                     </h6>
                     <h5>{formatter(item.price)}</h5>
                   </div>

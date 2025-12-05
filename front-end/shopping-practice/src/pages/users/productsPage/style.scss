@@ -1,8 +1,9 @@
 @use "sass:map";
 @import "../../../styles/pages/all";
-.containerr {
-  max-width: 1600px;
-  padding: 20px;
+.container_products {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
 }
 
 .row {
@@ -10,11 +11,9 @@
   flex-wrap: wrap;
 }
 
-
-
 .slidebar__item {
   margin-bottom: 20px;
-    
+
   h2 {
     font-size: 18px;
     font-weight: bold;
@@ -48,88 +47,78 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
-  .product_item {
-    &_pic {
-      height: 180px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.product_item {
+  &_pic {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-      .product_item_hover {
-        position: absolute;
-        bottom: -50px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 10px;
-        transition: bottom 0.3s ease, opacity 0.3s ease;
-        opacity: 0;
+    .product_item_hover {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      transition:
+        bottom 0.3s ease,
+        opacity 0.3s ease;
+      opacity: 0;
 
-        li {
-            list-style: none;
-            svg {
-                padding: 10px;
-                border-radius: 50%;
-                background: #fff;
-                transition: all 0.3s ease;
-            }
-        }
-
-        li:hover svg {
-          background: map.get($theme-colors, "main");
-          color: #fff;
-          transform: rotate(360deg);
-        }
-      }
-    }
-
-    &:hover .product_item_hover {
-      bottom: 15px;
-      opacity: 1;
-    }
-
-    &_text {
-      text-align: center;
-      margin-top: 10px;
-
-      h6 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 5px;
-
-        a {
-            color: map.get($theme-colors, "bold-text");
-            text-decoration: none;
-            display: block;         
-            white-space: nowrap;     
-            overflow: hidden;     
-            text-overflow: ellipsis;
-
-            &:hover {
-                color: map.get($theme-colors, "main");
-            }
+      li {
+        list-style: none;
+        svg {
+          padding: 10px;
+          border-radius: 50%;
+          background: #fff;
+          transition: all 0.3s ease;
         }
       }
 
-      h5 {
-        font-size: 16px;
-        font-weight: 700;
-        color: map.get($theme-colors, "main");
+      li:hover svg {
+        background: map.get($theme-colors, "main");
+        color: #fff;
+        transform: rotate(360deg);
       }
     }
   }
 
+  &:hover .product_item_hover {
+    bottom: 15px;
+    opacity: 1;
+  }
 
+  &_text {
+    text-align: center;
+    margin-top: 10px;
 
+    h6 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
 
-// @include Responsive($TABLET_DEVICE) {
-//   .product_list {
-//     grid-template-columns: repeat(2, 1fr);
-//   }
-// }
+      a {
+        color: map.get($theme-colors, "bold-text");
+        text-decoration: none;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
+        &:hover {
+          color: map.get($theme-colors, "main");
+        }
+      }
+    }
 
-
+    h5 {
+      font-size: 16px;
+      font-weight: 700;
+      color: map.get($theme-colors, "main");
+    }
+  }
+}

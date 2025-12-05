@@ -1,17 +1,17 @@
 @use "sass:map";
 @import "../../../../styles/pages/theme";
-.footer{
-    background: #F3F6FA;
+.footer {
+    background: #f3f6fa;
     padding-top: 70px;
     padding-bottom: 0;
-    .footer__about{
+    .footer__about {
         margin-bottom: 30px;
-        .footer__about__logo{
+        .footer__about__logo {
             margin-bottom: 15px;
             display: inline-block;
         }
 
-        ul li{
+        ul li {
             font-size: 16px;
             color: map.get($theme-colors, "normal-text");
             line-height: 36px;
@@ -19,24 +19,24 @@
         }
     }
 
-    .footer__widget{
+    .footer__widget {
         margin-bottom: 30px;
         overflow: hidden;
-        h6{
+        h6 {
             color: map.get($theme-colors, "normal-text");
             margin-bottom: 10px;
             font-size: 16px;
             font-weight: 700;
         }
 
-        ul{
+        ul {
             float: left;
             width: 50%;
 
-            li{
+            li {
                 list-style: none;
 
-                a{
+                a {
                     color: map.get($theme-colors, "normal-text");
                     font-size: 14px;
                     line-height: 32px;
@@ -45,27 +45,27 @@
             }
         }
 
-        p{
+        p {
             font-size: 14px;
             color: map.get($theme-colors, "normal-text");
             margin-bottom: 20px;
         }
 
-        form{
+        form {
             position: relative;
             margin-bottom: 30px;
 
-            .input-group{
+            .input-group {
                 display: flex;
                 align-items: center;
-                input{
+                input {
                     font-size: 16px;
                     padding-left: 20px;
                     color: map.get($theme-colors, "normal-text");
                     height: 46px;
                     border: 1px solid #ededed;
 
-                    ::placeholder{
+                    ::placeholder {
                         color: map.get($theme-colors, "normal-text");
                     }
                 }
@@ -76,24 +76,23 @@
                     min-width: max-content;
                 }
             }
-            
         }
     }
 
-    .footer__widget__social{
+    .footer__widget__social {
         display: flex;
         align-items: center;
         column-gap: 10px;
         margin-top: 20px;
 
-        div{
-            :hover{
-               background: map.get($theme-colors, "main"); 
-               color: #ffffff;
-               border-color: #ffffff;
+        div {
+            :hover {
+                background: map.get($theme-colors, "main");
+                color: #ffffff;
+                border-color: #ffffff;
             }
 
-            svg{
+            svg {
                 font-size: 20px;
                 padding: 10px;
                 color: #404040;
@@ -101,9 +100,7 @@
                 border-radius: 50%;
                 transition: all, 0.3s;
                 background: #ffffff;
-
             }
         }
     }
-    
 }
