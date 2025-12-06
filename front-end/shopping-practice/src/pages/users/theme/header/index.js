@@ -95,7 +95,7 @@ const Header = () => {
               </li>
             </ul>
             <div className="header__cart__price">
-              Giỏ hàng: <span>{formatter(10000)}</span>
+              Giỏ hàng: <span>{formatter(100)}</span>
             </div>
           </div>
           <div className="hamberger__menu__widget">
@@ -235,11 +235,11 @@ const Header = () => {
             <div className="col-xl-3 col-lg-3 col-md-3 col-sm-3">
               <div className="header__cart">
                 <div className="header__cart__price">
-                  <span>{formatter(100)}</span>
+                  <span>{formatter(123)}</span>
                 </div>
                 <ul>
                   <li>
-                    <Link to="#">
+                    <Link to={ROUTERS.USER.CART}>
                       <AiOutlineShoppingCart />
 
                       <span>5</span>

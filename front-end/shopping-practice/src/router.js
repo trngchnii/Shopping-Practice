@@ -5,6 +5,7 @@ import MasterLayout from "./pages/users/theme/master.Layout";
 import ProfilePage from "./pages/users/profilePage";
 import ProductsPage from "./pages/users/productsPage";
 import ProductDetailPage from "./pages/users/productDetailPage";
+import ShoppingCartPage from "./pages/users/shoppingCartPage";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -23,6 +24,10 @@ const renderUserRouter = () => {
     {
       path: ROUTERS.USER.PRODUCT,
       component: <ProductDetailPage />,
+    },
+    {
+      path: ROUTERS.USER.CART,
+      component: <ShoppingCartPage />,
     },
   ];
 
