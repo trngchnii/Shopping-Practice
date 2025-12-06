@@ -12,6 +12,11 @@
     flex: 0 0 58.3333%;
     max-width: 58.3333%;
 }
+
+.product__detail {
+    display: flex;
+    justify-content: center;
+}
 .product__detail__pic {
     display: flex;
     flex-direction: column;
@@ -31,7 +36,6 @@
     .main {
         display: flex;
         justify-content: flex-start;
-        flex-wrap: wrap;
         gap: 12px;
         margin-top: 15px;
 
@@ -124,61 +128,13 @@
         }
     }
 
-    .product_actions {
-        display: flex;
-        gap: 15px;
-        margin-top: 20px;
-
-        .btn_favorite {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 16px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-
-            svg {
-                font-size: 18px;
-            }
-
-            &:hover {
-                border-color: #999;
-                background: #f8f8f8;
-            }
-        }
-
-        .btn_add_to_bag {
-            flex: 1;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #fff;
-            background: #e53935;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background 0.3s ease;
-
-            &:hover {
-                background: #d32f2f;
-            }
-        }
-    }
-
     p {
         margin: 10px 0;
         line-height: 25px;
     }
 
     ul {
-        margin: 20px 0;
+        margin: 20px 0px;
         border-top: 1px solid #eee;
         padding-top: 20px;
 

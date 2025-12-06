@@ -9,7 +9,6 @@ import {
   AiOutlineCopy,
   AiOutlineEye,
   AiOutlineFacebook,
-  AiOutlineHeart,
   AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineShoppingCart,
@@ -17,6 +16,7 @@ import {
 import { formatter } from "../../../utils/formatter";
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
+import { Quantity } from "../../../components";
 const ProductDetailPage = () => {
   const responsive = {
     superLargeDesktop: {
@@ -67,8 +67,8 @@ const ProductDetailPage = () => {
     <>
       <Breadcrumb name="THE MONSTERS 1:00 A.M. Series" />
       <div className="container container_productDetail">
-        <div className="row">
-          <div className="col-6 product__detail__pic">
+        <div className="product__detail">
+          <div className="product__detail__pic">
             <img src={item3Img} alt="THE MONSTERS figure" />
             <div className="main">
               {imgs.map((item, key) => (
@@ -76,13 +76,27 @@ const ProductDetailPage = () => {
               ))}
             </div>
           </div>
-          <div className="col-6 product__detail__text">
+          <div className="product__detail__text">
             <h2>THE MONSTERS 1:00 A.M.</h2>
             <div className="seen_icon">
               <AiOutlineEye />
               {`102 (views)`}
             </div>
             <h3>{formatter(209.9)}</h3>
+            <p>
+              Brand: POP MART
+              <br />
+              Online Release: November 13, 2025
+              <br />
+              Size: 5.4–10.6cm / 2.13–4.17inches
+              <br />
+              Material: PVC / ABS / Electronic Component
+              <br />
+              Not suitable for persons under 15.
+              <br />
+              *Due to differences in measurement methods, the actual
+              measurements may vary.
+            </p>
             <div className="product_size_selector">
               <h4>SIZE</h4>
               <div className="size_options">
@@ -106,27 +120,8 @@ const ProductDetailPage = () => {
                 </div>
               </div>
             </div>
-            <p>
-              Brand: POP MART
-              <br />
-              Online Release: November 13, 2025
-              <br />
-              Size: 5.4–10.6cm / 2.13–4.17inches
-              <br />
-              Material: PVC / ABS / Electronic Component
-              <br />
-              Not suitable for persons under 15.
-              <br />
-              *Due to differences in measurement methods, the actual
-              measurements may vary.
-            </p>
-            <div className="product_actions">
-              <button className="btn_favorite">
-                <AiOutlineHeart />
-                Favorite
-              </button>
-              <button className="btn_add_to_bag">ADD TO BAG</button>
-            </div>
+
+            <Quantity />
 
             <ul>
               <li>
