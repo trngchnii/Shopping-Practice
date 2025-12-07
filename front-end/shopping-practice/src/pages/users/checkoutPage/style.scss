@@ -1,0 +1,142 @@
+@use "sass:map";
+@import "../../../styles/pages/all";
+
+.checkout {
+    margin: 40px auto;
+}
+.checkout__input {
+    margin-bottom: 20px;
+
+    label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+
+        .required {
+            color: red;
+            margin-left: 4px;
+        }
+
+        input {
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+                border-color: map.get($theme-colors, "main");
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+            }
+        }
+    }
+}
+.checkout__input {
+    textarea {
+        height: 60px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+        resize: none;
+        &:focus {
+            border-color: map.get($theme-colors, "main");
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+    }
+}
+.checkout__input__group {
+    display: flex;
+    gap: 20px;
+
+    .checkout__input {
+        flex: 1;
+    }
+}
+.checkout__confirm {
+    margin: 0 30px;
+}
+
+.checkout__order {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin: 0 30px;
+    padding: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #222;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+
+            span {
+                font-size: 14px;
+                color: #555;
+            }
+
+            b {
+                font-size: 14px;
+                font-weight: 600;
+                color: #222;
+            }
+
+            h4 {
+                font-size: 14px;
+                font-weight: 500;
+                margin: 0;
+            }
+
+            &.checkout__order__subtotal {
+                border-top: 2px solid #ddd;
+                margin-top: 10px;
+                border-bottom: none;
+                h3 {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #000;
+                }
+
+                b {
+                    font-size: 16px;
+                    color: map.get($theme-colors, "main");
+                }
+            }
+        }
+    }
+
+    .button-submit {
+        margin-top: 20px;
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: map.get($theme-colors, "main");
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: map.get($theme-colors, "description");
+        }
+    }
+}
